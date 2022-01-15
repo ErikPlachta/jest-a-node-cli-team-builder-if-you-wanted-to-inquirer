@@ -45,9 +45,10 @@ test('GET Interns school', () => {
 test('GET Intern employee role', () => {
     
     //-- make employee to test
-    const intern = new Intern(this.name,this.id,this.email,"UNC");
     
-
+    
+    const intern = new Intern(this.name,this.id,this.email,"UNC");
     //-- what it should be
+    console.log(intern.getRole());
     expect(intern.getRole()).toBe('Intern');
 });
