@@ -33,7 +33,7 @@ test('GET employee.id value', () => {
     //-- make employee to test
     const employee = new Employee("Erik",'001',"erik@noemail.com");
 
-    expect(employee.getID()).toBe("001");
+    expect(employee.getId()).toBe("001");
 });
 
 
@@ -44,4 +44,14 @@ test('GET employee.email value', () => {
     const employee = new Employee("Erik",'001',"erik@noemail.com");
 
     expect(employee.getEmail()).toBe("erik@noemail.com");
+});
+
+
+//-- Getting email
+test('GET employee OBJ', () => {
+
+    //-- make employee to test
+    const employee = new Employee("Erik",'001',"erik@noemail.com");
+
+    expect(employee.getRole()).toBe(employee);
 });
