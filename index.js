@@ -17,7 +17,7 @@ const {writeFile} = require('./utils/generate-team.js');
 const inquirer = require('inquirer');
 
 //-- builds file TODO:: 01/15/2022 #EP || Update this
-const _generate_Readme = require('./src/template.js');
+const _generate_team = require('./src/template.js');
 
 
 //----------------------------------------------------------------------------//
@@ -28,7 +28,7 @@ const _generate_Readme = require('./src/template.js');
 //----------------------------------------------------------------------------//
 //-- Getting User Data
 
-const _get_User_Data = () => {
+const _get_teamData = () => {
     /* 
         Uses inquirer.js to prompt user specific details.
 
@@ -40,7 +40,7 @@ const _get_User_Data = () => {
 
     console.log(`
 ======================
-Enter User Information
+    Get Team Data
 ======================
     `);
     
@@ -266,66 +266,44 @@ function init() {
   */
 
     //-- Array that holds user and project data
-    var readme_Data = {
+    var teamData_Dict = {
       'user_Data':{
         'name' : undefined,
         'github' : undefined,
         'email' : undefined
-      },
-      'project_Data': {
-        "Title" : undefined,
-        "License" : undefined,
-        "Description" : undefined,
-        "Guidelines" : undefined,
-        "Installation" : undefined,
-        //-- How to use it
-        'Useage' : 'Useage',
-        "Useage_summary" : undefined,
-        "Useage_syntax" : undefined,
-        'Testing' : undefined,
-        'Contributing' :'Contributing',
-        'Questions' :'Questions'
-      }, 
-      'toc' : {
-        1: 'Title',
-        2: 'Description',
-        3: 'Guidelines',
-        4: 'Installation',
-        5: 'Useage',
-        6: 'Testing',
-        8: 'Contributing',
-        9: 'Questions'
       }
     };
   
   //-- Get user specific info
-  _get_User_Data()
+  _get_teamData()
 
     //-- then write userdata to array
-    .then( user_Data => {
-      readme_Data.user_Data = Object.assign({},readme_Data.user_Data, user_Data);
+    .then( teamData_Results => {
+      // teamData_Dict.user_Data = Object.assign({},readme_Data.user_Data, user_Data);
+      teamData_Dict.user_Data = teamData_Results;
+      return teamData_Dict;
     })
   
-    //-- Get project specific info
-    .then(_get_Project_Data)
+    // //-- Get project specific info
+    // .then(_get_Project_Data)
 
-    .then( project_Data => {
+    // .then( project_Data => {
       
-      //-- Set Project data dict value
-      readme_Data.project_Data = Object.assign({},readme_Data.project_Data, project_Data);
+    //   //-- Set Project data dict value
+    //   readme_Data.project_Data = Object.assign({},readme_Data.project_Data, project_Data);
       
-      //-- return dict updated
-      return readme_Data;
-    }) 
+    //   //-- return dict updated
+    //   return readme_Data;
+    // }) 
 
     //-- Send data into template to build OBJ that will be used to write
-    .then( readme_Data => {
-      return _generate_Readme(readme_Data);
+    .then( teamData_Dict => {
+      return _generate_team(teamData_Dict);
     })
 
     //-- Write readme file to ./dist/README.md
-    .then( readme_Data => {
-      return writeFile(readme_Data);
+    .then( teamData_Dict => {
+      return writeFile(teamData_Dict);
     })
 
     //-- If success, we take the writeFileResponse object provided by the writeFile()
