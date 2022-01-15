@@ -40,3 +40,16 @@ test('GET Engineer github username', () => {
     //-- what it should be
     expect(engineer.getGithub()).toBe('erikplachta');
 });
+
+
+
+//-- Get Engineer Role
+test('GET Engineers employee role', () => {
+    
+    //-- make employee to test
+    const engineer = new Engineer(this.name,this.id,this.email,"erikplachta");
+    
+
+    //-- what it should be
+    expect(engineer.getRole()).toBe('Engineer');
+});
