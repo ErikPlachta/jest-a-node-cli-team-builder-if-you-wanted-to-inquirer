@@ -26,11 +26,11 @@ test('SET Intern Employee. Accepts normal Employee values, school, and assigns r
 
     //-- Intern specific values
     expect(intern.school).toBe('UNC');
-    expect(engineer.role).toBe('Intern');
+    expect(intern.role).toBe('Intern');
 });
 
 
-//-- Get Engineer GitHub username
+//-- Get intern GitHub username
 test('GET Intern school name', () => {
     
     //-- make employee to test
