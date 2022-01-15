@@ -5,6 +5,7 @@
 //----------------------------------------------------------------------------//
 //-- Build Table of Contents
 
+//TODO:: 01/15/2022 #EP | get waht I need then delete this
 function _set_TOC(project_Data, toc, TOC) {
     //-- if values defined, add to index4
   
@@ -33,6 +34,7 @@ function _set_TOC(project_Data, toc, TOC) {
   };
   
   
+  //TODO:: 01/15/2022 #EP | get waht I need then delete this
   const _get_TOC = TOC => {
     //-- Build TOC based on if values are defined
     
@@ -51,6 +53,7 @@ function _set_TOC(project_Data, toc, TOC) {
   //----------------------------------------------------------------------------//
   //-- Building section data
   
+  //TODO:: 01/15/2022 #EP | get waht I need then delete this
   const _get_Guidelines = project_Data => {
     // -- If provided guidelines, build them.
   
@@ -62,6 +65,7 @@ function _set_TOC(project_Data, toc, TOC) {
     }
   }
   
+  //TODO:: 01/15/2022 #EP | get waht I need then delete this
   const _get_Useage = project_Data => {
     // -- If provided guidelines, build them.
   
@@ -108,70 +112,77 @@ function _set_TOC(project_Data, toc, TOC) {
     }
   }
   
+
+
+
+
   
-  //----------------------------------------------------------------------------//
-  //-- RUNNING 
+//----------------------------------------------------------------------------//
+//-- RUNNING 
   
-  module.exports = readme_Data => {
-    // destructure page data by section
-    const { user_Data, project_Data, toc } = readme_Data;
+module.exports = myTeam => {
+  // destructure page data by section
+      
   
-    //-- Holds table of content
-    var TOC = {};
+  // console.log("project_Data: ", project_Data)
+  // console.log("TOC: ", TOC)
+  //-- Build and then return dynamically
+  return `<html>
+<head>
+  <style></style>
+  <title>My Team</title>
+</head>
+<body>
+  <header>
+    <h1>My Teamr</h1>
+  </header>
+  
+  <section class="teamMembers">
     
-    
-    //-- Build ToC based on provided data
-    TOC = _set_TOC(project_Data,toc,TOC); 
+    <div class="teamMember manager">
+      <span>  
+        <h2>Manger Name</h2>
+        <span class="role">Manager</span>
+      </span>
+      <span class="teamMember_details">
+        <span class="id">ID: </span>
+        <span class="email">Email: </span>
+        <span class="github">GitHub: </span>
+      </span>
+    </div>
+
+
+    <div class="teamMember engineer">
+      <span>  
+        <h2>Engineer Name</h2>
+        <span class="role">Engineer</span>
+      </span>
+      <span class="teamMember_details">
+        <span class="id">ID: </span>
+        <span class="email">Email: </span>
+        <span class="github">GitHub: </span>
+      </span>
+    </div>
+
+    <div class="teamMember intern">
+      <span>  
+        <h2>Intern Name</h2>
+        <span class="role">Intern</span>
+      </span>
+      <span class="teamMember_details">
+        <span class="id">ID: </span>
+        <span class="email">Email: </span>
+        <span class="github">GitHub: </span>
+      </span>
+    </div>
   
-    // console.log("project_Data: ", project_Data)
-    // console.log("TOC: ", TOC)
-    //-- Build and then return dynamically
-    return `# ${project_Data.Title}
-    
-  ## Description
-  
-  ${project_Data.Description}
-  
-  ${_get_License(readme_Data)}
-  
-  ---
-  
-  ---
-  
-  ## Table of Contents
-  ${_get_TOC(TOC)}
-  
-  ---
-  
-  ---
-  
-  ## Installation
-  
-  ${project_Data.Installation}
-  
-  ${_get_Guidelines(project_Data)}
-  
-  ## Useage
-  
-  ${_get_Useage(project_Data)}
-  
-  ## Testing
-  
-  ${project_Data.Test}
-  
-  ## Contributing
-  
-  ${_get_Contribution(project_Data)}
-  
-  ## Questions
-  
-  Have feedback, suggestions, or general questions?
-  > You can reach out to me, ${user_Data.name}, on my 
-  [GitHub]("https://github.com/${user_Data.github}") or via email
-  at ${user_Data.email}.
-  
-  ---
-  
-   &copy; ${new Date().getFullYear()} by ${user_Data.name}
-  `;};
-  
+  </section>
+
+<footer>
+  <span>
+    Generated on: ${new Date().getFullYear()}
+    </span>
+</footer>
+</body>
+</html>
+`;};

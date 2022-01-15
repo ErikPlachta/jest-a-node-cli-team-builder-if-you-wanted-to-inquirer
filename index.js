@@ -10,14 +10,14 @@
 
 //-- grabbing functions from generate-site with object destructing
 //-- builds file TODO:: 01/15/2022 #EP || Update this
-const {writeFile} = require('./utils/generate-readme.js');
+const {writeFile} = require('./utils/generate-team.js');
 
 
 //-- runs prompts
 const inquirer = require('inquirer');
 
 //-- builds file TODO:: 01/15/2022 #EP || Update this
-const _generate_Readme = require('./src/readme-template.js');
+const _generate_Readme = require('./src/template.js');
 
 
 //----------------------------------------------------------------------------//
