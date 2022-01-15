@@ -30,6 +30,40 @@ test('SET Intern Employee. Accepts normal Employee values, school, and assigns r
 });
 
 
+//-- Get intern ID
+test('GET intern ID', () => {
+    
+    //-- make employee to test
+    const intern = new Intern(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( intern.getID ).toBe(this.id);
+});
+
+//-- Get intern Name
+test('GET intern Name', () => {
+    
+    //-- make employee to test
+    const intern = new Intern(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( intern.getName ).toBe(this.name);
+});
+
+
+//-- Get intern Email
+test('GET intern Email', () => {
+    
+    //-- make employee to test
+    const intern = new Intern(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( intern.getEmail ).toBe(this.email);
+});
+
+
+
+
 //-- Get intern GitHub username
 test('GET Interns school', () => {
     
@@ -40,15 +74,12 @@ test('GET Interns school', () => {
     expect(intern.getSchool()).toBe('UNC');
 });
 
-
 //-- Get Intern Role
 test('GET Intern employee role', () => {
     
     //-- make employee to test
-    
-    
     const intern = new Intern(this.name,this.id,this.email,"UNC");
     //-- what it should be
-    console.log(intern.getRole());
+    // console.log(intern.getRole());
     expect(intern.getRole()).toBe('Intern');
 });

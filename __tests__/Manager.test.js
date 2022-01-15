@@ -29,6 +29,36 @@ test('SET Manager Employee. Accepts normal Employee values, officeNumber, and as
     expect(manager.role).toBe('Manager');
 });
 
+//-- Get Manager ID
+test('GET Manager ID', () => {
+    
+    //-- make employee to test
+    const manager = new Manager(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( manager.getID ).toBe(this.id);
+});
+
+//-- Get Manager Name
+test('GET Manager Name', () => {
+    
+    //-- make employee to test
+    const manager = new Manager(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( manager.getName ).toBe(this.name);
+});
+
+
+//-- Get Manager Email
+test('GET Manager Email', () => {
+    
+    //-- make employee to test
+    const manager = new Manager(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( manager.getEmail ).toBe(this.email);
+});
 
 //-- Get manager GitHub username
 test('GET managers officeNumber', () => {

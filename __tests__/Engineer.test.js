@@ -36,9 +36,39 @@ test('GET Engineer github username', () => {
     //-- make employee to test
     const engineer = new Engineer(this.name,this.id,this.email,"erikplachta");
     
-
     //-- what it should be
     expect(engineer.getGithub()).toBe('erikplachta');
+});
+
+//-- Get Engineer ID
+test('GET Engineer ID', () => {
+    
+    //-- make employee to test
+    const engineer = new Engineer(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( engineer.getID ).toBe(this.id);
+});
+
+//-- Get Engineer Name
+test('GET Engineer Name', () => {
+    
+    //-- make employee to test
+    const engineer = new Engineer(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( engineer.getName ).toBe(this.name);
+});
+
+
+//-- Get Engineer Email
+test('GET Engineer Email', () => {
+    
+    //-- make employee to test
+    const engineer = new Engineer(this.name,this.id,this.email,"erikplachta");
+    
+    //-- what it should be
+    expect( engineer.getEmail ).toBe(this.email);
 });
 
 
@@ -49,7 +79,6 @@ test('GET Engineers employee role', () => {
     //-- make employee to test
     const engineer = new Engineer(this.name,this.id,this.email,"erikplachta");
     
-
     //-- what it should be
-    expect(engineer.getRole()).toBe('Engineer');
+    expect(engineer.getRole()).toBe("Engineer");
 });
