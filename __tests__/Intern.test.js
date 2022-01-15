@@ -31,7 +31,7 @@ test('SET Intern Employee. Accepts normal Employee values, school, and assigns r
 
 
 //-- Get intern GitHub username
-test('GET Intern school name', () => {
+test('GET Interns school', () => {
     
     //-- make employee to test
     const intern = new Intern(this.name,this.id,this.email,"UNC");
