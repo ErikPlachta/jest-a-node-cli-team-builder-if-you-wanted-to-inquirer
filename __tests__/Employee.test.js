@@ -1,7 +1,10 @@
 //------------------------------------------------------------------------------
+//-- Imports
 
 const Employee = require('../lib/Employee');
 
+//------------------------------------------------------------------------------
+//-- Testing with Jest
 
 //-- Creating an Employee
 test('creates a new employee', () => {
