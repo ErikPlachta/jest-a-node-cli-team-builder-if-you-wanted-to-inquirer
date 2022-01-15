@@ -56,5 +56,5 @@ test('GET employee OBJ', () => {
     //-- make employee to test
     const employee = new Employee("Erik",'001',"erik@noemail.com");
 
-    expect(employee.getRole()).toBe(employee);
+    expect(employee.getEmployee()).toBe(employee);
 });
