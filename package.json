@@ -1,0 +1,27 @@
+{
+  "name": "c10_teamprofilegenerator",
+  "version": "1.0.0",
+  "description": "Using node.js, jest.js and inquirer.js to build a CLI to generate an employee page.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErikPlachta/node-team-profile-generator.git"
+  },
+  "keywords": [
+    "node",
+    "jest",
+    "inquirer"
+  ],
+  "author": "Erik Plachta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ErikPlachta/node-team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/ErikPlachta/node-team-profile-generator#readme"
+}
