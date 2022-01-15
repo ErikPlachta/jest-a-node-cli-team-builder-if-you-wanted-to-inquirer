@@ -11,7 +11,7 @@ jest.mock('../lib/Employee.js');
 
 
 //-- Creating an Employee
-test('SET Engineer Employee. Accepts github username, and assigns a role of Engineer', () => {
+test('SET Engineer Employee. Accepts normal Employee values, github username, and assigns a role of Engineer', () => {
     
     //-- make employee to test
     //-- TODO:: use mock for this
