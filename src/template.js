@@ -84,7 +84,7 @@ const _get_EmployeeCards = teamData_Dict => {
 
 //----------------------------------------------------------------------------//
 //-- RUNNING 
-  
+
 const set_TeamTemplate = teamData_Dict => {
 
   // _get_EmployeeCards(teamData_Dict)
@@ -129,10 +129,10 @@ const set_TeamTemplate = teamData_Dict => {
 </footer>
 </body>
 </html>
-`;};
+`};
 
 
 //------------------------------------------------------------------------------
 //-- Exports
 
-module.exports = {set_TeamTemplate,_get_GitHub,_get_EmployeeCards}
+module.exports = {set_TeamTemplate, _get_GitHub, _get_EmployeeCards}

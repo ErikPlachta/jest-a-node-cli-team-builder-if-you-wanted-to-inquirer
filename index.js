@@ -28,6 +28,9 @@ class Init {
     
     //-- Array that holds user and project data. Defined here for ez management    
     this.teamData_Dict = {};
+
+    //-- all team-members have been added
+    // this.teamComplete = false;
   };
 
   //--------------------------------------------------------------------------
@@ -48,7 +51,7 @@ class Init {
         {
           type: 'list',
           name: 'add',
-          message: 'Would you like to add another employee to your team?: ',
+          message: 'Would you like to add ANOTHER employee to your team?: ',
           choices: ['Yes','No'],
           validate: userChoice => {
             if(userChoice === 'Yes'){
@@ -80,7 +83,7 @@ class Init {
       {
         type: 'list',
         name: 'add',
-        message: 'Would you like to add the above employee to your team?: ',
+        message: 'Is this correct?: ',
         choices: ['Yes','No'],
         validate: userChoice => {
           if(userChoice === 'Yes'){
@@ -173,27 +176,37 @@ class Init {
       ]);
   };
 
-  // set_team_Data
+  //-- Building Team
+  _set_Team = () => { 
+    //-- runs team building and then when completed lets run() know it can build to write
 
 
-   //-- Runs program
-   run(){
-    /*
-      Primary function that runs the program.
-    */
-    
+    //-- Used for each time this is called, so employee created can be added to team if needed
+    let temp_Employee = {};
+
     //-- Get user specific info
     this._get_EmployeeBasics()
-      //-- then write userdata to array
+      
+    //-- then write userdata to array
       .then(employee_Obj => {
-        return this._verify_EmployeeEntry(employee_Obj),employee_Obj
+        temp_Employee = employee_Obj;
+        return this._verify_EmployeeEntry(employee_Obj)
       })
       
       //-- Confirm if created employee is ok to add.
       .then(results => {
-        if(results != false) {
+        //-- If want to add to dict
+        if(results.add === 'Yes') {
+          // console.log(temp_Employee);
+          //-- create ID based on next available
+          temp_Employee.id = Object.keys(this.teamData_Dict).length + 1;
           // -- Add to Dict
-          this.teamData_Dict[Object.keys(this.teamData_Dict).length+1] = results;
+          this.teamData_Dict[Object.keys(this.teamData_Dict).length + 1] = temp_Employee;
+          // console.log(`Lenght: ${Object.keys(this.teamData_Dict).length}`)
+        } 
+        //-- don't add to dict
+        else {
+          console.log("don't add")
         }
       })
 
@@ -202,35 +215,89 @@ class Init {
       })
       
       //--- Determine if done. if YES, 
-      .then( results => {
-        if (results == true) {
-
+      .then( ({ add }) => {
+        
+        if (add === 'Yes') {
+          //-- re-run to add another
+          this._set_Team();
         }
+        
+        //-- Move on from user entry to build content
         else {
-          return this.teamData_Dict;
+          console.log(`this.teamData_Dict: ${JSON.stringify(this.teamData_Dict)}`);
+          return this._BuildingContent();
+          
         }
-      })
-      
-      //-- Build the HTML content
-      .then( teamData_Dict => {
-        return set_TeamTemplate(teamData_Dict);
-      })
+    })
+    .catch( err => {
+      console.log(`Error: ${err}`);
+    });
+  };
 
-      //-- Write File to ./dist/myteam.html
-      .then( template_MyTeam => {
-        return set_writeTeamFile(template_MyTeam);
-      })
-  
-      //-- If success, we take the writeFileResponse object provided by the writeFile()
-      // function's resolve() execution to log it.
-      .then(write_Response => {
+
+  //----------------------------------------------------------------------------
+  //-- makes template then creates file
+
+  _BuildingContent = () => { 
+
+    //-- Build the HTML content
+    let template = this.set_TeamTemplate(this.teamData_Dict);
+    // console.log(template);
+    set_writeTeamFile(template)
+     .then(write_Response => {
         console.log(write_Response);
       })
       //-- if it fails any-step along the way, catch error nd log here.
       .catch(err => {
         console.log("ERROR: ", err);
-      })
-    ;
+      });
+    
+    
+      // //-- Write File to ./dist/myteam.html
+      // .then( template_MyTeam => {
+      //   return set_writeTeamFile(template_MyTeam);
+      // })
+  
+      // //-- If success, we take the writeFileResponse object provided by the writeFile()
+      // // function's resolve() execution to log it.
+      // .then(write_Response => {
+      //   console.log(write_Response);
+      // })
+      // //-- if it fails any-step along the way, catch error nd log here.
+      // .catch(err => {
+      //   console.log("ERROR: ", err);
+      // });
+  };
+  
+
+   //-- Runs program
+   run(){
+    //-- Starts the APP by kicking off team builder
+    
+    this._set_Team()
+    
+    
+      
+    //   //-- Build the HTML content
+    //   .then( teamData_Dict => {
+    //     return set_TeamTemplate(this.teamData_Dict);
+    //   })
+
+    //   //-- Write File to ./dist/myteam.html
+    //   .then( template_MyTeam => {
+    //     return set_writeTeamFile(template_MyTeam);
+    //   })
+  
+    //   //-- If success, we take the writeFileResponse object provided by the writeFile()
+    //   // function's resolve() execution to log it.
+    //   .then(write_Response => {
+    //     console.log(write_Response);
+    //   })
+    //   //-- if it fails any-step along the way, catch error nd log here.
+    //   .catch(err => {
+    //     console.log("ERROR: ", err);
+    //   })
+    // ;
   
   };
 
