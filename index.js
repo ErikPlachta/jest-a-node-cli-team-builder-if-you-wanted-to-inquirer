@@ -33,9 +33,14 @@ class Init {
     // this.teamComplete = false;
   };
 
-  //--------------------------------------------------------------------------
-  //-- Getting User Data
+  
 
+
+
+  //----------------------------------------------------------------------------
+  //-- Validating User Data
+
+  //-- User to verify if want to add another employee
   _verify_AddAnotherEmployee = () => {
     //-- Prompt user to give them choice to add or redo employee
 
@@ -65,6 +70,7 @@ class Init {
       ]);
   };
 
+  //-- User to verify if employee info is correct
   _verify_EmployeeEntry = employee_Obj =>  { 
       //-- Prompt user to give them choice to add or redo employee
 
@@ -97,6 +103,12 @@ class Init {
     ]);
   };
 
+
+
+  //--------------------------------------------------------------------------
+  //-- Getting User Data
+
+  //-- Get GitHub Username
   _get_GitHub(){
     return inquirer
       .prompt([ 
@@ -117,6 +129,7 @@ class Init {
       ]);
   };
 
+  //-- Function that asks employee details
   _get_EmployeeBasics = () => { /* 
           Uses inquirer.js to prompt user specific details.
 
@@ -171,12 +184,13 @@ class Init {
             type: 'list',
             name: 'role',
             message: 'Define employees role:',
-            choices: ['Manager', 'Engineer', 'Intern']
+            choices: ['Manager', 'Engineer', 'Intern'],
           },          
       ]);
   };
 
-  //-- Building Team
+  //----------------------------------------------------------------------------
+  //-- Primary function that runs building the team
   _set_Team = () => { 
     //-- runs team building and then when completed lets run() know it can build to write
 
@@ -187,7 +201,11 @@ class Init {
     //-- Get user specific info
     this._get_EmployeeBasics()
       
-    //-- then write userdata to array
+      //-- Define role specific values
+      .then(employee_Obj => {  
+        return _get_Roles(employee_Obj);
+      })
+
       .then(employee_Obj => {
         temp_Employee = employee_Obj;
         return this._verify_EmployeeEntry(employee_Obj)
@@ -197,7 +215,8 @@ class Init {
       .then(results => {
         //-- If want to add to dict
         if(results.add === 'Yes') {
-          // console.log(temp_Employee);
+          
+
           //-- create ID based on next available
           temp_Employee.id = Object.keys(this.teamData_Dict).length + 1;
           // -- Add to Dict
