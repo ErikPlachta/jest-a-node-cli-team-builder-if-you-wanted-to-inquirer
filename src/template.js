@@ -32,7 +32,7 @@ const _get_EmployeeRoleValues = this_Employee => {
     return`<li class="list-group-item bg-white p-3">Office Number: ${this_Employee.officeNumber}</li>`
   }
   else if ( this_Employee.role === 'Engineer') {
-    return`<li class="list-group-item bg-white p-3">GitHub: <a href="${_get_GitHub(this_Employee.github)}">${this_Employee.github}</a></li>`
+    return`<li class="list-group-item bg-white p-3">GitHub: <a href="${_get_GitHub(this_Employee.github)}" target="_blank">${this_Employee.github}</a></li>`
   }
   else if ( this_Employee.role === 'Intern'){
     return`<li class="list-group-item bg-white p-3">School: ${this_Employee.school}</li>`
@@ -67,7 +67,7 @@ const _get_EmployeeCards = teamData_Dict => {
         <div class ="p-3 bg-light col">
           <ul class="list-group list-group-flush p-2 pb-3 pt-3">
             <li class="list-group-item bg-white p-3">ID: ${this_Employee.id}</li>
-            <li class="list-group-item bg-white p-3">Email: ${this_Employee.email}</li>
+            <li class="list-group-item bg-white p-3">Email: <a href="mailto:${this_Employee.email}">${this_Employee.email}</a></li>
             ${_get_EmployeeRoleValues(this_Employee)}
           </ul>
         </div>
