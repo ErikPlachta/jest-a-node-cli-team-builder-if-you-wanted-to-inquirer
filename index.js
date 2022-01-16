@@ -15,17 +15,16 @@ const inquirer = require('inquirer');
 const set_TeamTemplate = require('./src/template.js');
 
 //-- grabbing functions from generate-site with object destructing
-const set_BuildMyTeam = require('./utils/build-team.js');
+const set_writeTeamFile = require('./utils/write-team.js');
 
 //----------------------------------------------------------------------------//
 //-- Running Program
 
 class Init {
   constructor(){
-    
-    this.set_BuildMyTeam = set_BuildMyTeam;
+    // TODO:: 01/16/2022 #EP || Add things or remove this is not needed.
     this.set_TeamTemplate = set_TeamTemplate;
-    
+    this.set_writeTeamFile = set_writeTeamFile;
   };
 
   //----------------------------------------------------------------------------
@@ -295,18 +294,18 @@ class Init {
       
       //-- Send data into template to build OBJ that will be used to write
       .then( teamData_Dict => {
-        return this.set_TeamTemplate(teamData_Dict);
+        return set_TeamTemplate(teamData_Dict);
       })
 
       //-- Write readme file to ./dist/README.md
-      .then( teamData_Dict => {
-        return set_BuildMyTeam(teamData_Dict);
+      .then( template_MyTeam => {
+        return set_writeTeamFile(template_MyTeam);
       })
   
       //-- If success, we take the writeFileResponse object provided by the writeFile()
       // function's resolve() execution to log it.
-      .then(writeFileResponse => {
-        console.log(writeFileResponse);
+      .then(write_Response => {
+        console.log(write_Response);
       })
       //-- if it fails any-step along the way, catch error nd log here.
       .catch(err => {
