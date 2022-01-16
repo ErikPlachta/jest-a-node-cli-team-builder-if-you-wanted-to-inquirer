@@ -3,138 +3,89 @@
 //-- building the page
 
 
-//----------------------------------------------------------------------------//
-//-- Get GitHub URLS updated for interns
 
-function _get_GitHub(teamDict){
-  return true;
+//----------------------------------------------------------------------------//
+//-- Building Employee Cards
+
+function _get_GitHub(github_Username){
+  //-- Get GitHub URLS updated for interns
+  return `https://www.github.com/${github_Username}`;
 }
 
-//----------------------------------------------------------------------------//
-//-- Build Table of Contents
-
-//TODO:: 01/15/2022 #EP | get waht I need then delete this
-function _set_TOC(project_Data, toc, TOC) {
-    //-- if values defined, add to index4
   
-    let location = 1;
-    for (section in toc){
-      
-      //-- the section has defined content within the user data
-      if(project_Data[toc[section]]){
-  
-        //-- if title of project as header
-        if (toc[section] === 'title'){
-          //-- remove spaces between letters and assign to actual title of project
-          TOC[location] = (project_Data[toc[section]].replace(/\s/g, '-')).toLowerCase();
-          location = location +1;
-        }
-  
-        //-- all other section titles don't change
-        else {
-          TOC[location] = toc[section];
-          location = location +1;
-        }
-      }
-  
-    };
-    return TOC;
-  };
-  
-  
-  //TODO:: 01/15/2022 #EP | get waht I need then delete this
-  const _get_TOC = TOC => {
-    //-- Build TOC based on if values are defined
-    
-    TOC_Formatted = '';
-  
-    for (section in TOC) {
-      // console.log(TOC[section])
-      //-- Build the ToC
-      TOC_Formatted = TOC_Formatted + `
-  ${section}. [${TOC[section]}](#${TOC[section]})`;
-      
-    }; 
-    return TOC_Formatted;
-  };
-  
-  //----------------------------------------------------------------------------//
-  //-- Building section data
-  
-  
-  // TODO:: 01/07/2022 #EP || Build these out
-  const _get_License = readme_Data => {
-    
-    //-- Build README content
-    
-    //-- based on selected license, return short summary and URL
-    let { user_Data, project_Data } = readme_Data;
-    return `![GitHub license](https://img.shields.io/github/license/${user_Data.github}/${project_Data.Title.replace(/\s/g, '-')})`
-  
-  }
-  
-  //TODO -- give user option to pick from this or type manually
-  const _get_Contribution = project_Data => {
-    
-  if (project_Data.Contributing === 'Contributor-Covenant'){
-    return `This Project abides by the Contributor Covenant. 
-  > For more information, check out https://www.contributor-covenant.org/.`
-  } 
-  else if (project_Data.Contributing === 'None'){
-    return `This Project Does not accept contributions at this time.`
-  } 
-  //-- Whatever user picked/typed
-  else {
-    return `${project_Data.Contributing}`
-  }
-};
   
 const _get_EmployeeRole = role => {
   //-- Takes the role of employee as argument, returns results
 
-  if (role === 'manager') {
+  if (role === 'Manager') {
     return`<i class='fas fa-mug-hot'></i>Manager`
   }
-  else if ( role === 'engineer') {
+  else if ( role === 'Engineer') {
     return`<i class='fas fa-glasses'></i>Engineer`
   }
-  else if ( role === 'intern'){
+  else if ( role === 'Intern'){
     return`<i class='fas fa-user-graduate'></i>Intern`
   } 
   else {
     return`Employee`
   }
+};
+
+const _get_EmployeeRoleValues = this_Employee => {
+  //-- Takes unique employee obj values, returns unique results for card if has one.
+
+  if(this_Employee.role === "Manager") {
+    return`<li class="list-group-item bg-white p-3">Office Number: ${this_Employee.officeNumber}</li>`
+  }
+  else if ( this_Employee.role === 'Engineer') {
+    return`<li class="list-group-item bg-white p-3">GitHub: <a href="${_get_GitHub(this_Employee.github)}>${this_Employee.github}</a></li>`
+  }
+  else if ( this_Employee.role === 'Intern'){
+    return`<li class="list-group-item bg-white p-3">Office Number: ${this_Employee.school}</li>`
+  } 
+  else {
+    //-- Returns something so doesn't appear as undefined
+    return 'null';
+  }
 }
 
 const _get_EmployeeCards = teamData_Dict => {
-  //-- Takes team dictionary and build HTML based on values provided.
+  //-- Takes team dictionary and build Card HTML based on each employees unique values
 
+  //-- List to hold each employee's card HTML, joined in return statement
   var teamData_Cards = [];
+
+
   for(employee in teamData_Dict){
+    
+    //-- holds the current employee obj values to clean up code below
+    let this_Employee = teamData_Dict[employee];
+    
     let card_Template = `
     <!-- ${employee} -->
       <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
         <div class="card-header bg-primary text-white">
-          <h3 class="card-title">${teamData_Dict[employee].name}</h3>
+          <h3 class="card-title">${this_Employee.name}</h3>
           <h5 class="card-title"> 
-            ${_get_EmployeeRole(teamData_Dict[employee].role)}
+            ${_get_EmployeeRole(this_Employee.role)}
           </h5>
         </div>
         <div class ="p-3 bg-light col">
           <ul class="list-group list-group-flush p-2 pb-3 pt-3">
-            <li class="list-group-item bg-white p-3">ID: </li>
-            <li class="list-group-item bg-white p-3">Email: </li>
-            <li class="list-group-item bg-white p-3">GitHub: </li>
+            <li class="list-group-item bg-white p-3">ID: ${this_Employee.id}</li>
+            <li class="list-group-item bg-white p-3">Email: ${this_Employee.email}</li>
+            ${_get_EmployeeRoleValues(this_Employee)}
           </ul>
         </div>
       </div>`
   
+      //-- Adds employee card to array with others
       teamData_Cards.push(card_Template);
+  };
   
-    // console.log(teamData_Dict[employee])
-  }
-  console.log(teamData_Cards.join(''))
-  return teamData_Cards;
+  console.log(teamData_Cards.join(''));
+
+  return teamData_Cards.join('');
 };
 
 //----------------------------------------------------------------------------//
