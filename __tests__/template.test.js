@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //-- Imports
 
-const {set_TeamTemplate,_get_GitHub,} = require('../src/template.js');
+const {set_TeamTemplate,_get_GitHub, _get_EmployeeCards} = require('../src/template.js');
 
 const Team = require('../lib/__mocks__/team.js');
 
@@ -16,13 +16,30 @@ test('RUN template primary build function to verify returns a response', () => {
 
 
 
-test('GET Intern GitHub URLs', () => {
+test('GET Engineer GitHub URLs', () => {
 
     //-- Create new template OBJ
 
     expect(_get_GitHub(Team.getTeam())).toBeDefined();
 
 });
+
+test("GET each employee card HTML based on their employee type from function _get_EmployeeCard.", () => {
+
+    expect(_get_EmployeeCards(Team.getTeam())).toBeDefined();
+
+});
+
+// test("GET Intern School", () => {
+
+//     expect(_get_School(Team.getTeam())).toBeDefined();
+// });
+
+
+// test("GET Manager officeNumber", () => {
+
+//     expect(_get_officeNumber(Team.getTeam())).toBeDefined();
+// });
 
 // //-- Write build data to file
 // test('RUN index.set_writeTeamFile() to build ./dist/myteam.html and verify promise resolves.', () => {

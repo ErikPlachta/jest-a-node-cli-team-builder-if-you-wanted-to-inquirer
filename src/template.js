@@ -70,36 +70,82 @@ function _set_TOC(project_Data, toc, TOC) {
     //-- based on selected license, return short summary and URL
     let { user_Data, project_Data } = readme_Data;
     return `![GitHub license](https://img.shields.io/github/license/${user_Data.github}/${project_Data.Title.replace(/\s/g, '-')})`
-    // +`${project_Data.license}`
   
-    const license_Dict = {
-      'NONE' : 'No license.',
-      'MIT' : 'mit',
-    }
-    return license_Summary;
   }
   
   //TODO -- give user option to pick from this or type manually
   const _get_Contribution = project_Data => {
     
-    if (project_Data.Contributing === 'Contributor-Covenant'){
-      return `This Project abides by the Contributor Covenant. 
+  if (project_Data.Contributing === 'Contributor-Covenant'){
+    return `This Project abides by the Contributor Covenant. 
   > For more information, check out https://www.contributor-covenant.org/.`
-    } 
-    else if (project_Data.Contributing === 'None'){
-      return `This Project Does not accept contributions at this time.`
-    } 
-    //-- Whatever user picked/typed
-    else {
-      return `${project_Data.Contributing}`
-    }
+  } 
+  else if (project_Data.Contributing === 'None'){
+    return `This Project Does not accept contributions at this time.`
+  } 
+  //-- Whatever user picked/typed
+  else {
+    return `${project_Data.Contributing}`
   }
+};
   
+const _get_EmployeeRole = role => {
+  //-- Takes the role of employee as argument, returns results
+
+  if (role === 'manager') {
+    return`<i class='fas fa-mug-hot'></i>Manager`
+  }
+  else if ( role === 'engineer') {
+    return`<i class='fas fa-glasses'></i>Engineer`
+  }
+  else if ( role === 'intern'){
+    return`<i class='fas fa-user-graduate'></i>Intern`
+  } 
+  else {
+    return`Employee`
+  }
+}
+
+const _get_EmployeeCards = teamData_Dict => {
+  //-- Takes team dictionary and build HTML based on values provided.
+
+  var teamData_Cards = [];
+  for(employee in teamData_Dict){
+    let card_Template = `
+    <!-- ${employee} -->
+      <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title">${teamData_Dict[employee].name}</h3>
+          <h5 class="card-title"> 
+            ${_get_EmployeeRole(teamData_Dict[employee].role)}
+          </h5>
+        </div>
+        <div class ="p-3 bg-light col">
+          <ul class="list-group list-group-flush p-2 pb-3 pt-3">
+            <li class="list-group-item bg-white p-3">ID: </li>
+            <li class="list-group-item bg-white p-3">Email: </li>
+            <li class="list-group-item bg-white p-3">GitHub: </li>
+          </ul>
+        </div>
+      </div>`
+  
+      teamData_Cards.push(card_Template);
+  
+    // console.log(teamData_Dict[employee])
+  }
+  console.log(teamData_Cards.join(''))
+  return teamData_Cards;
+};
+
 //----------------------------------------------------------------------------//
 //-- RUNNING 
   
 const set_TeamTemplate = teamData_Dict => {
-return`<!DOCTYPE html>
+
+  _get_EmployeeCards(teamData_Dict)
+
+
+  return`<!DOCTYPE html>
 <html>
 <head>
   <meta charset='utf-8'>
@@ -236,4 +282,7 @@ return`<!DOCTYPE html>
 `;};
 
 
-module.exports = {set_TeamTemplate,_get_GitHub}
+//------------------------------------------------------------------------------
+//-- Exports
+
+module.exports = {set_TeamTemplate,_get_GitHub,_get_EmployeeCards}
