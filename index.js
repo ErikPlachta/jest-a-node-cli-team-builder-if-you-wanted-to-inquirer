@@ -93,7 +93,7 @@ class Init {
         choices: ['Yes','No'],
         validate: userChoice => {
           if(userChoice === 'Yes'){
-            return employee_Obj;
+            return true;
           }
           else {
             return false;
@@ -107,27 +107,6 @@ class Init {
 
   //--------------------------------------------------------------------------
   //-- Getting User Data
-
-  //-- Get GitHub Username
-  _get_GitHub(){
-    return inquirer
-      .prompt([ 
-          //-- GitHub Username
-        {
-          type: 'input',
-          name: 'github',
-          message: 'Your GitHub Username: ',
-          validate: githubInput => {
-              if (githubInput) {
-              return true;
-              } else {
-              console.log('Please enter your GitHub username!');
-              return false;
-              }
-          }
-        }
-      ]);
-  };
 
   //-- Function that asks employee details
   _get_EmployeeBasics = () => { /* 
@@ -189,6 +168,72 @@ class Init {
       ]);
   };
 
+  _get_Roles = employee_Obj => {
+    let role = employee_Obj.role;
+
+    if (role === "Manager"){
+
+      return inquirer
+      .prompt([ 
+          //-- GitHub Username
+        {
+          type: 'input',
+          name: 'officeNumber',
+          message: 'Enter the Office Number: ',
+          validate: userInput => {
+              if (userInput) {
+              return true;
+              } else {
+              console.log('Please enter an Office Number.');
+              return false;
+              }
+          }
+        }
+      ]);
+    }
+    else if (role === "Engineer") {
+
+      return inquirer
+      .prompt([ 
+          //-- GitHub Username
+        {
+          type: 'input',
+          name: 'github',
+          message: 'Your GitHub Username: ',
+          validate: githubInput => {
+              if (githubInput) {
+              return true;
+              } else {
+              console.log('Please enter your GitHub username!');
+              return false;
+              }
+          }
+        }
+      ]);
+    }
+
+    else if (role === "Intern") {
+      return inquirer
+      .prompt([ 
+          //-- GitHub Username
+        {
+          type: 'input',
+          name: 'school',
+          message: 'Enter the team-members school name: ',
+          validate: userInput => {
+              if (userInput) {
+              return true;
+              } else {
+              console.log('Please enter the name of a school.');
+              return false;
+              }
+          }
+        }
+      ]);
+    }
+    
+  }
+
   //----------------------------------------------------------------------------
   //-- Primary function that runs building the team
   _set_Team = () => { 
@@ -203,12 +248,18 @@ class Init {
       
       //-- Define role specific values
       .then(employee_Obj => {  
-        return _get_Roles(employee_Obj);
+        temp_Employee = employee_Obj;
+        return this._get_Roles(employee_Obj);
       })
 
-      .then(employee_Obj => {
-        temp_Employee = employee_Obj;
-        return this._verify_EmployeeEntry(employee_Obj)
+      .then(roleResults => {
+        console.log(roleResults)
+        
+        
+        temp_Employee = Object.assign({},temp_Employee,roleResults)
+        
+        console.log(temp_Employee)
+        return this._verify_EmployeeEntry(temp_Employee);
       })
       
       //-- Confirm if created employee is ok to add.
