@@ -10,7 +10,7 @@ const fs = require('fs');
 //-- Writing README.md
 
 
-const writeFile = fileContent => {
+const set_BuildMyTeam = fileContent => {
     
     return new Promise((resolve, reject) => {
       fs.writeFile('./dist/myteam.html', fileContent, err => {
@@ -39,6 +39,4 @@ const writeFile = fileContent => {
 
 //----------------------------------------------------------------------------//
 //-- Exporting functions for app.js to have access to
-module.exports = {
-    writeFile
-};
+module.exports = set_BuildMyTeam;

@@ -251,7 +251,7 @@ return`<!DOCTYPE html>
 
 <footer class="p-2 mt-5 d-flex justify-content-evenly text-white bottom-0 end-0" style="background-color: #E84756">
   <span>
-    Generated on: ${new Date().getFullYear()}
+    Generated on: ${new Date()}
     </span>
 </footer>
 </body>

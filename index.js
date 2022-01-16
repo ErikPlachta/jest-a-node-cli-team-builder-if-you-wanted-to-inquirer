@@ -4,31 +4,191 @@
     Purpose:: Use Node.js and Inquirier.js node package to build a README.md
                 via command line.  
 */
-
 //----------------------------------------------------------------------------//
 //-- Imports
 
-//-- grabbing functions from generate-site with object destructing
-//-- builds file TODO:: 01/15/2022 #EP || Update this
-const {writeFile} = require('./utils/generate-team.js');
 
 //-- runs prompts
 const inquirer = require('inquirer');
 
 //-- builds file TODO:: 01/15/2022 #EP || Update this
-const _generate_team = require('./src/template.js');
+const set_TeamTemplate = require('./src/template.js');
 
-
-//----------------------------------------------------------------------------//
-//-- Global Variables
-
-
+//-- grabbing functions from generate-site with object destructing
+const set_BuildMyTeam = require('./utils/build-team.js');
 
 //----------------------------------------------------------------------------//
+//-- Running Program
+
+class Init {
+  constructor(){
+    
+    this.set_BuildMyTeam = set_BuildMyTeam;
+    this.set_TeamTemplate = set_TeamTemplate;
+    
+  };
+
+  //----------------------------------------------------------------------------
+  //-- Getting Data about the project specifically.
+
+  get_ProjectData = () => {
+    /* 
+        Uses inquirer.js to prompt user for README specific details.
+
+        collecting the following values
+          
+            license
+            title
+            description
+            installation
+            guidelines
+            useage
+    */
+
+
+    console.log(`
+  =========================
+  Enter Project Information
+  =========================
+    `);
+
+    return inquirer
+      .prompt([
+        
+        //-- License assigned to project
+        //-- TODO:: 01/07/2022 #EP || Add more
+        {
+          type: 'list',
+          name: 'License',
+          message: 'Add a License:',
+          choices: ['None','ISC', 'MIT', 'GNU']
+        },
+      //-- Project Title
+        {
+          type: 'input',
+          name: 'Title',
+          message: 'Enter your Project Title ( as appears on GitHub ): ',
+          validate: input => {
+            if (input) {
+              return true;
+            } else {
+              console.log('Please enter a Project Title!');
+              return false;
+            }
+            }
+        },
+        
+        //-- Description
+        {
+          type: 'input',
+          name: 'Description',
+          message: 'Enter your Project description: ',
+          validate: input => {
+            if (input) {
+              return true;
+            } else {
+              console.log('Please enter your Project Description!');
+              return false;
+            }
+          }
+        },
+        
+        //-- Installation
+          // What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+          {
+            type: 'input',
+            name: 'Installation',
+            message: 'Enter installation instructions (text summary) : ',
+            validate: input => {
+              if (input) {
+                return true;
+              } else {
+                console.log('Please enter your Project installation instructions!');
+                return false;
+              }
+            }
+          },
+          
+        //-- Gudielines
+          //-- 
+          {
+            type: 'input',
+            name: 'Guidelines',
+            message: 'Enter your project guidelines: ',
+            validate: input => {
+              if (input) {
+                return true;
+              } else {
+                console.log('Please enter your Project guidelines!');
+                return false;
+              }
+            }
+          },
+
+        //-- Useage
+          // Provide instructions and examples for use. Include screenshots as needed.
+          {
+            type: 'input',
+            name: 'Useage_summary',
+            message: 'Enter a short summary of HOW to use the project ( syntax is next ): ',
+            validate: input => {
+              if (input) {
+                return true;
+              } else {
+                console.log('Please enter your Project useage summary!');
+                return false;
+              }
+              }
+          },
+
+          {
+            type: 'input',
+            name: 'Useage_syntax',
+            message: 'Enter the syntax  ( required ): ',
+            validate: input => {
+              if (input) {
+                return true;
+              } else {
+                console.log('Please enter your Project useage syntax!');
+                return false;
+              }
+            }
+          },
+
+          //-- Testing
+          //-- 
+          {
+            type: 'input',
+            name: 'Test',
+            message: 'Enter how to test this project: ',
+            validate: input => {
+              if (input) {
+                return true;
+              } else {
+                console.log('Please enter your Project testing paramters!');
+                return false;
+              }
+            }
+          },
+
+          //-- Contribution
+          //TODO:: 01/07/2022 #EP || Add more contribution options
+          {
+            type: 'list',
+            name: 'Contributing',
+            message: 'How would you like to handle project contributions?: ',
+            choices: ['Contributor-Covenant','None'],
+          },
+
+      ])
+    ; //-- End of return statement
+  };
+
+
+  //----------------------------------------------------------------------------//
 //-- Getting User Data
 
-const _get_teamData = () => {
-    /* 
+  get_TeamData = () => { /* 
         Uses inquirer.js to prompt user specific details.
 
         collecting the following values
@@ -38,9 +198,9 @@ const _get_teamData = () => {
     */
 
     console.log(`
-======================
+  ======================
     Get Team Data
-======================
+  ======================
     `);
     
     return inquirer
@@ -92,231 +252,90 @@ const _get_teamData = () => {
                 console.log('Please enter a valid email address!');
                 return false;
               }
-           }
+          }
         }
           
     ]);
-};
+  };
+
+  // set_team_Data
 
 
-//----------------------------------------------------------------------------//
-//-- Getting Data about the project specifically.
-
-const _get_Project_Data = () => {
-  /* 
-      Uses inquirer.js to prompt user for README specific details.
-
-      collecting the following values
-        
-          license
-          title
-          description
-          installation
-          guidelines
-          useage
-  */
-
-
-  console.log(`
-=========================
-Enter Project Information
-=========================
-  `);
-
-  return inquirer
-    .prompt([
-      
-      //-- License assigned to project
-      //-- TODO:: 01/07/2022 #EP || Add more
-      {
-        type: 'list',
-        name: 'License',
-        message: 'Add a License:',
-        choices: ['None','ISC', 'MIT', 'GNU']
-      },
-    //-- Project Title
-      {
-        type: 'input',
-        name: 'Title',
-        message: 'Enter your Project Title ( as appears on GitHub ): ',
-        validate: input => {
-          if (input) {
-            return true;
-          } else {
-            console.log('Please enter a Project Title!');
-            return false;
-          }
-          }
-      },
-      
-      //-- Description
-      {
-        type: 'input',
-        name: 'Description',
-        message: 'Enter your Project description: ',
-        validate: input => {
-          if (input) {
-            return true;
-          } else {
-            console.log('Please enter your Project Description!');
-            return false;
-          }
+   //-- Runs program
+   run(){
+    /*
+      Primary function that runs the program.
+    */
+  
+      //-- Array that holds user and project data
+      var teamData_Dict = {
+        'user_Data':{
+          'name' : undefined,
+          'github' : undefined,
+          'email' : undefined
         }
-      },
+      };
+    
+    //-- Get user specific info
+    this.get_TeamData()
+      //-- then write userdata to array
+      .then( teamData_Results => {
       
-      //-- Installation
-        // What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
-        {
-          type: 'input',
-          name: 'Installation',
-          message: 'Enter installation instructions (text summary) : ',
-          validate: input => {
-            if (input) {
-              return true;
-            } else {
-              console.log('Please enter your Project installation instructions!');
-              return false;
-            }
-          }
-        },
-        
-      //-- Gudielines
-        //-- 
-        {
-          type: 'input',
-          name: 'Guidelines',
-          message: 'Enter your project guidelines: ',
-          validate: input => {
-            if (input) {
-              return true;
-            } else {
-              console.log('Please enter your Project guidelines!');
-              return false;
-            }
-          }
-        },
+        // teamData_Dict.user_Data = Object.assign({},readme_Data.user_Data, user_Data);
+        teamData_Dict.user_Data = teamData_Results;
 
-      //-- Useage
-        // Provide instructions and examples for use. Include screenshots as needed.
-        {
-          type: 'input',
-          name: 'Useage_summary',
-          message: 'Enter a short summary of HOW to use the project ( syntax is next ): ',
-          validate: input => {
-            if (input) {
-              return true;
-            } else {
-              console.log('Please enter your Project useage summary!');
-              return false;
-            }
-            }
-        },
+        //-- 01/16/2022 #EP ||ADD While Loop for getting team membesr until done
+        // while still adding team members
+        // run _get_teamData()
+        // ask if done
+        // exit once done
 
-        {
-          type: 'input',
-          name: 'Useage_syntax',
-          message: 'Enter the syntax  ( required ): ',
-          validate: input => {
-            if (input) {
-              return true;
-            } else {
-              console.log('Please enter your Project useage syntax!');
-              return false;
-            }
-          }
-        },
+        return teamData_Dict;
+      })  
+      
+      //-- Send data into template to build OBJ that will be used to write
+      .then( teamData_Dict => {
+        return this.set_TeamTemplate(teamData_Dict);
+      })
 
-        //-- Testing
-        //-- 
-        {
-          type: 'input',
-          name: 'Test',
-          message: 'Enter how to test this project: ',
-          validate: input => {
-            if (input) {
-              return true;
-            } else {
-              console.log('Please enter your Project testing paramters!');
-              return false;
-            }
-          }
-        },
-
-        //-- Contribution
-        //TODO:: 01/07/2022 #EP || Add more contribution options
-        {
-          type: 'list',
-          name: 'Contributing',
-          message: 'How would you like to handle project contributions?: ',
-          choices: ['Contributor-Covenant','None'],
-        },
-
-    ])
-  ; //-- End of return statement
-};
-
-//----------------------------------------------------------------------------//
-//-- Running Program
-
-
-function init() {
-  /*
-    Primary function that runs the program.
-  */
-
-    //-- Array that holds user and project data
-    var teamData_Dict = {
-      'user_Data':{
-        'name' : undefined,
-        'github' : undefined,
-        'email' : undefined
-      }
-    };
+      //-- Write readme file to ./dist/README.md
+      .then( teamData_Dict => {
+        return set_BuildMyTeam(teamData_Dict);
+      })
   
-  //-- Get user specific info
-  _get_teamData()
-
-    //-- then write userdata to array
-    .then( teamData_Results => {
-      // teamData_Dict.user_Data = Object.assign({},readme_Data.user_Data, user_Data);
-      teamData_Dict.user_Data = teamData_Results;
-      return teamData_Dict;
-    })
+      //-- If success, we take the writeFileResponse object provided by the writeFile()
+      // function's resolve() execution to log it.
+      .then(writeFileResponse => {
+        console.log(writeFileResponse);
+      })
+      //-- if it fails any-step along the way, catch error nd log here.
+      .catch(err => {
+        console.log("ERROR: ", err);
+      })
+    ;
   
-    // //-- Get project specific info
-    // .then(_get_Project_Data)
+  };
 
-    // .then( project_Data => {
-      
-    //   //-- Set Project data dict value
-    //   readme_Data.project_Data = Object.assign({},readme_Data.project_Data, project_Data);
-      
-    //   //-- return dict updated
-    //   return readme_Data;
-    // }) 
+}; 
 
-    //-- Send data into template to build OBJ that will be used to write
-    .then( teamData_Dict => {
-      return _generate_team(teamData_Dict);
-    })
 
-    //-- Write readme file to ./dist/README.md
-    .then( teamData_Dict => {
-      return writeFile(teamData_Dict);
-    })
+//------------------------------------------------------------------------------
+//-- Export / Running
+/* 
+  If calling index.js directly, creates Init OBJ and then run
+    - For using the app with CLI `node index`
+  
+  If calling index.js indirectly, exports Init class.
+    - For testing the app with jest `npm test index`
 
-    //-- If success, we take the writeFileResponse object provided by the writeFile()
-    // function's resolve() execution to log it.
-    .then(writeFileResponse => {
-      console.log(writeFileResponse);
-    })
-    //-- if it fails any-step along the way, catch error nd log here.
-    .catch(err => {
-      console.log("ERROR: ", err);
-    })
-  ;
+*/
 
-};
-
+if (require.main === module) {
+  console.log('called directly');
+  const init = new Init();
+  init.run();
+} else {
+  console.log('Exporting');
+  module.exports = Init;
+}
 //-- Runs program
-init();

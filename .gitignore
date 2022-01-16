@@ -1,7 +1,7 @@
+dist
+_ARCHIVE
 node_modules/
 package-lock.json
 .vscode
-.DS_Store/
-_ARCHIVE
+.DS_Store
 *.code-workspace
-_ARCHIVE
