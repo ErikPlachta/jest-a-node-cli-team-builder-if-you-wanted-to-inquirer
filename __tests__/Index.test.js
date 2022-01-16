@@ -3,7 +3,7 @@
 
 const Index = require('../index.js');
 
-const team = require('../lib/__mocks__/team.js');
+const Team = require('../lib/__mocks__/team.js');
 
 //------------------------------------------------------------------------------
 //-- Testing with Jest
@@ -15,7 +15,7 @@ test('RUN index.set_TeamTemplate(teamData_Dict) to receive team data, respond wi
     const index = new Index;
     
     //-- send mock  TeamData in to verify it reutrns something
-    expect(index.set_TeamTemplate(team.getTeam())).toBeDefined();
+    expect(index.set_TeamTemplate(Team.getTeam())).toBeDefined();
 });
 
 //-- Write build data to file
@@ -28,7 +28,7 @@ test('RUN index.set_writeTeamFile() to build ./dist/myteam.html and verify promi
     // //-- Send built template with mock TeamData to write to file
     // index.set_writeTeamFile(index.set_TeamTemplate(team.getTeam()));
 
-    return expect(index.set_writeTeamFile(index.set_TeamTemplate(team.getTeam())))
+    return expect(index.set_writeTeamFile(index.set_TeamTemplate(Team.getTeam())))
     .resolves.toBeDefined();
 
 });
