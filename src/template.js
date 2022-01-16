@@ -38,10 +38,10 @@ const _get_EmployeeRoleValues = this_Employee => {
     return`<li class="list-group-item bg-white p-3">Office Number: ${this_Employee.officeNumber}</li>`
   }
   else if ( this_Employee.role === 'Engineer') {
-    return`<li class="list-group-item bg-white p-3">GitHub: <a href="${_get_GitHub(this_Employee.github)}>${this_Employee.github}</a></li>`
+    return`<li class="list-group-item bg-white p-3">GitHub: <a href="${_get_GitHub(this_Employee.github)}">${this_Employee.github}</a></li>`
   }
   else if ( this_Employee.role === 'Intern'){
-    return`<li class="list-group-item bg-white p-3">Office Number: ${this_Employee.school}</li>`
+    return`<li class="list-group-item bg-white p-3">School: ${this_Employee.school}</li>`
   } 
   else {
     //-- Returns something so doesn't appear as undefined
@@ -93,7 +93,7 @@ const _get_EmployeeCards = teamData_Dict => {
   
 const set_TeamTemplate = teamData_Dict => {
 
-  _get_EmployeeCards(teamData_Dict)
+  // _get_EmployeeCards(teamData_Dict)
 
 
   return`<!DOCTYPE html>
@@ -110,8 +110,7 @@ const set_TeamTemplate = teamData_Dict => {
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
   <!-- FontAwesome for Icons -->
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-  <!-- <script src="https://use.fontawesome.com/bab062a6a0.js"></script> -->
+  <script src='https://kit.fontawesome.com/a076d05399.js'crossorigin="anonymous"></script>
   
 </head>
 <body>
@@ -125,103 +124,9 @@ const set_TeamTemplate = teamData_Dict => {
     
     <!-- Puts all cards in row and flexes so size and space is consistent -->
     <div class="d-flex justify-content-center row">
-
-
-      <!-- Card -->
-      <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
-        <div class="card-header bg-primary text-white">
-          <h3 class="card-title">Manager Name</h3>
-          <h5 class="card-title"> 
-            <i class='fas fa-mug-hot'></i>
-            Manager
-          </h5>
-        </div>
-        <div class ="p-3 bg-light col">
-          <ul class="list-group list-group-flush p-2 pb-3 pt-3">
-            <li class="list-group-item bg-white p-3">ID: </li>
-            <li class="list-group-item bg-white p-3">Email: </li>
-            <li class="list-group-item bg-white p-3">GitHub: </li>
-          </ul>
-        </div>
-      </div>
-  
-       <!-- Card -->
-       <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
-        <div class="card-header bg-primary text-white">
-          <h3 class="card-title">Manager Name</h3>
-          <h5 class="card-title"> 
-            <i class='fas fa-mug-hot'></i>
-            Manager
-          </h5>
-        </div>
-        <div class ="p-3 bg-light col">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-white p-3">ID: </li>
-            <li class="list-group-item bg-white p-3">Email: </li>
-            <li class="list-group-item bg-white p-3">GitHub: </li>
-          </ul>
-        </div>
-      </div>
-  
-       <!-- Card -->
-       <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
-        <div class="card-header bg-primary text-white">
-          <h3 class="card-title">Manager Name</h3>
-          <h5 class="card-title"> 
-            <i class='fas fa-mug-hot'></i>
-            Manager
-          </h5>
-        </div>
-        <div class ="p-3 bg-light col">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-white p-3">ID: </li>
-            <li class="list-group-item bg-white p-3">Email: </li>
-            <li class="list-group-item bg-white p-3">GitHub: </li>
-          </ul>
-        </div>
-      </div>
-  
-
-      <!-- Card -->
-      <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
-        <div class="card-header bg-primary text-white">
-          <h3 class="card-title">Engineer Name</h3>
-          <h5 class="card-title"> 
-            <i class='fas fa-glasses'></i>
-            Engineer
-          </h5>
-        </div>
-        <div class ="p-3 bg-light">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-white p-3">ID: </li>
-            <li class="list-group-item bg-white p-3">Email: </li>
-            <li class="list-group-item bg-white p-3">GitHub: </li>
-          </ul>
-        </div>
-      </div>
-  
-      <!-- Card -->
-      <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
-        <div class="card-header bg-primary text-white">
-          <h3 class="card-title">Intern Name</h3>
-          <h5 class="card-title"> 
-            <i class='fas fa-user-graduate'></i>
-            Intern
-          </h5>
-        </div>
-        <div class ="p-3 bg-light">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-white p-3">ID: </li>
-            <li class="list-group-item bg-white p-3">Email: </li>
-            <li class="list-group-item bg-white p-3">GitHub: </li>
-          </ul>
-        </div>
-      </div>
-
-    <!-- End of ROW holding cards COL -->
-    </div>
-    <!-- End of parent container -->
-  </section>
+      ${_get_EmployeeCards(teamData_Dict)}
+    </div> <!-- End of ROW holding cards COL -->
+  </section> <!-- End of parent container -->
 
 <footer class="p-2 mt-5 d-flex justify-content-evenly text-white bottom-0 end-0" style="background-color: #E84756">
   <span>
