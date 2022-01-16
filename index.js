@@ -330,11 +330,11 @@ class Init {
 */
 
 if (require.main === module) {
-  console.log('called directly');
+  // console.log('called directly');
   const init = new Init();
   init.run();
 } else {
-  console.log('Exporting');
+  // console.log('Exporting');
   module.exports = Init;
 }
 //-- Runs program

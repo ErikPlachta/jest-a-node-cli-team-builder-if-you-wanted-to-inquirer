@@ -25,10 +25,8 @@ test('RUN index.set_writeTeamFile() to build ./dist/myteam.html and verify promi
     //-- Create new obj
     const index = new Index;
     
-    //-- Send built template with mock TeamData to write to file
-    
-    
-    index.set_writeTeamFile(index.set_TeamTemplate(team.getTeam()));
+    // //-- Send built template with mock TeamData to write to file
+    // index.set_writeTeamFile(index.set_TeamTemplate(team.getTeam()));
 
     return expect(index.set_writeTeamFile(index.set_TeamTemplate(team.getTeam())))
     .resolves.toBeDefined();
