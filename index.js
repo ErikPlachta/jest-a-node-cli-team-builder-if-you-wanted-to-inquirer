@@ -25,180 +25,55 @@ class Init {
     // TODO:: 01/16/2022 #EP || Add things or remove this is not needed.
     this.set_TeamTemplate = set_TeamTemplate;
     this.set_writeTeamFile = set_writeTeamFile;
+    
+    //-- Array that holds user and project data. Defined here for ez management    
+    this.teamData_Dict = {};
   };
 
-  //----------------------------------------------------------------------------
-  //-- Getting Data about the project specifically.
+  //--------------------------------------------------------------------------
+  //-- Getting User Data
 
-  get_ProjectData = () => {
-    /* 
-        Uses inquirer.js to prompt user for README specific details.
+  _verify_AddAnotherEmployee = () => {
+    //-- Prompt user to give them choice to add or redo employee
 
-        collecting the following values
-          
-            license
-            title
-            description
-            installation
-            guidelines
-            useage
-    */
-
-
+    //-- Print user prompt
     console.log(`
-  =========================
-  Enter Project Information
-  =========================
-    `);
+    ==================================
+      Keep Building Your Team
+    ==================================
+    `)
 
     return inquirer
       .prompt([
-        
-        //-- License assigned to project
-        //-- TODO:: 01/07/2022 #EP || Add more
         {
           type: 'list',
-          name: 'License',
-          message: 'Add a License:',
-          choices: ['None','ISC', 'MIT', 'GNU']
-        },
-      //-- Project Title
-        {
-          type: 'input',
-          name: 'Title',
-          message: 'Enter your Project Title ( as appears on GitHub ): ',
-          validate: input => {
-            if (input) {
+          name: 'add',
+          message: 'Would you like to add another employee to your team?: ',
+          choices: ['Yes','No'],
+          validate: userChoice => {
+            if(userChoice === 'Yes'){
               return true;
-            } else {
-              console.log('Please enter a Project Title!');
-              return false;
             }
-            }
-        },
-        
-        //-- Description
-        {
-          type: 'input',
-          name: 'Description',
-          message: 'Enter your Project description: ',
-          validate: input => {
-            if (input) {
-              return true;
-            } else {
-              console.log('Please enter your Project Description!');
+            else {
               return false;
             }
           }
-        },
-        
-        //-- Installation
-          // What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
-          {
-            type: 'input',
-            name: 'Installation',
-            message: 'Enter installation instructions (text summary) : ',
-            validate: input => {
-              if (input) {
-                return true;
-              } else {
-                console.log('Please enter your Project installation instructions!');
-                return false;
-              }
-            }
-          },
-          
-        //-- Gudielines
-          //-- 
-          {
-            type: 'input',
-            name: 'Guidelines',
-            message: 'Enter your project guidelines: ',
-            validate: input => {
-              if (input) {
-                return true;
-              } else {
-                console.log('Please enter your Project guidelines!');
-                return false;
-              }
-            }
-          },
-
-        //-- Useage
-          // Provide instructions and examples for use. Include screenshots as needed.
-          {
-            type: 'input',
-            name: 'Useage_summary',
-            message: 'Enter a short summary of HOW to use the project ( syntax is next ): ',
-            validate: input => {
-              if (input) {
-                return true;
-              } else {
-                console.log('Please enter your Project useage summary!');
-                return false;
-              }
-              }
-          },
-
-          {
-            type: 'input',
-            name: 'Useage_syntax',
-            message: 'Enter the syntax  ( required ): ',
-            validate: input => {
-              if (input) {
-                return true;
-              } else {
-                console.log('Please enter your Project useage syntax!');
-                return false;
-              }
-            }
-          },
-
-          //-- Testing
-          //-- 
-          {
-            type: 'input',
-            name: 'Test',
-            message: 'Enter how to test this project: ',
-            validate: input => {
-              if (input) {
-                return true;
-              } else {
-                console.log('Please enter your Project testing paramters!');
-                return false;
-              }
-            }
-          },
-
-          //-- Contribution
-          //TODO:: 01/07/2022 #EP || Add more contribution options
-          {
-            type: 'list',
-            name: 'Contributing',
-            message: 'How would you like to handle project contributions?: ',
-            choices: ['Contributor-Covenant','None'],
-          },
-
-      ])
-    ; //-- End of return statement
+        }
+      ]);
   };
 
-
-//----------------------------------------------------------------------------//
-//-- Getting User Data
-
   _verify_EmployeeEntry = employee_Obj =>  { 
-    //-- Prompt user to give them choice to add or redo employee
- 
-    //-- Print user prompt
-      console.log(`
-  ==================================
-    Confirming Employee Entry
-  ==================================
-  - Name: ${employee_Obj.name}
-  - Email: ${employee_Obj.email}
-  - Role: ${employee_Obj.role}
-  `);
+      //-- Prompt user to give them choice to add or redo employee
+
+      //-- Print user prompt
+        console.log(`
+    ==================================
+      Confirming Employee Entry
+    ==================================
+    - Name: ${employee_Obj.name}
+    - Email: ${employee_Obj.email}
+    - Role: ${employee_Obj.role}
+    `);
 
     return inquirer
     .prompt([
@@ -206,92 +81,96 @@ class Init {
         type: 'list',
         name: 'add',
         message: 'Would you like to add the above employee to your team?: ',
-        choices: ['Yes','No']
+        choices: ['Yes','No'],
+        validate: userChoice => {
+          if(userChoice === 'Yes'){
+            return employee_Obj;
+          }
+          else {
+            return false;
+          }
+        }
       }
     ]);
   };
 
-
-
-_get_GitHub(){
-  return inquirer
-    .prompt([ 
-        //-- GitHub Username
-      {
-        type: 'input',
-        name: 'github',
-        message: 'Your GitHub Username: ',
-        validate: githubInput => {
-            if (githubInput) {
-            return true;
-            } else {
-            console.log('Please enter your GitHub username!');
-            return false;
-            }
-        }
-      }
-    ]);
-};
-
-
-
-_get_EmployeeBasics = () => { /* 
-        Uses inquirer.js to prompt user specific details.
-
-        collecting the following values
-          name
-          github
-          email
-    */
-
-    console.log(`
-==================================
-  Add an Employee to Your Team
-==================================
-    `);
-    
+  _get_GitHub(){
     return inquirer
-      .prompt([
-
-        //-- Name
+      .prompt([ 
+          //-- GitHub Username
         {
           type: 'input',
-          name: 'name',
-          message: 'Define employees name: ',
-          validate: nameInput => {
-            if (nameInput) {
+          name: 'github',
+          message: 'Your GitHub Username: ',
+          validate: githubInput => {
+              if (githubInput) {
               return true;
-            } else {
-              console.log('Please enter a name.');
+              } else {
+              console.log('Please enter your GitHub username!');
               return false;
-            }
-          }
-        },
-        //-- Email Address
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Define employees email address: ',
-            validate: function(email) {
-              // Regex mail check (return true if valid mail)
-              let valid_Email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
-              if (valid_Email){
-                return true;
               }
-              else {
-                console.log('Please enter a valid email address.');
+          }
+        }
+      ]);
+  };
+
+  _get_EmployeeBasics = () => { /* 
+          Uses inquirer.js to prompt user specific details.
+
+          collecting the following values
+            name
+            github
+            email
+      */
+
+      console.log(`
+  ==================================
+    Add an Employee to Your Team
+  ==================================
+      `);
+      
+      return inquirer
+        .prompt([
+
+          //-- Name
+          {
+            type: 'input',
+            name: 'name',
+            message: 'Define employees name: ',
+            validate: nameInput => {
+              if (nameInput) {
+                return true;
+              } else {
+                console.log('Please enter a name.');
                 return false;
               }
-          }
-        },
-         //-- Role
-         {
-          type: 'list',
-          name: 'role',
-          message: 'Define employees role:',
-          choices: ['Manager', 'Engineer', 'Intern']
-        },          
-    ]);
+            }
+          },
+          //-- Email Address
+          {
+              type: 'input',
+              name: 'email',
+              message: 'Define employees email address: ',
+              validate: function(email) {
+                // Regex mail check (return true if valid mail)
+                let valid_Email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+                if (valid_Email){
+                  return true;
+                }
+                else {
+                  console.log('Please enter a valid email address.');
+                  return false;
+                }
+            }
+          },
+          //-- Role
+          {
+            type: 'list',
+            name: 'role',
+            message: 'Define employees role:',
+            choices: ['Manager', 'Engineer', 'Intern']
+          },          
+      ]);
   };
 
   // set_team_Data
@@ -302,40 +181,35 @@ _get_EmployeeBasics = () => { /*
     /*
       Primary function that runs the program.
     */
-  
-      //-- Array that holds user and project data
-      var teamData_Dict = {
-        'user_Data':{
-          'name' : undefined,
-          'github' : undefined,
-          'email' : undefined
-        }
-      };
     
     //-- Get user specific info
     this._get_EmployeeBasics()
       //-- then write userdata to array
       .then(employee_Obj => {
-        return this._verify_EmployeeEntry(employee_Obj) 
-      })
-      .then(add => {
-        console.log(add);
+        return this._verify_EmployeeEntry(employee_Obj),employee_Obj
       })
       
-      //-- Merge Data
-      .then( teamData_Results => {
+      //-- Confirm if created employee is ok to add.
+      .then(results => {
+        if(results != false) {
+          // -- Add to Dict
+          this.teamData_Dict[Object.keys(this.teamData_Dict).length+1] = results;
+        }
+      })
+
+      .then( () => {
+        return this._verify_AddAnotherEmployee();
+      })
       
-        // teamData_Dict.user_Data = Object.assign({},readme_Data.user_Data, user_Data);
-        teamData_Dict.user_Data = teamData_Results;
+      //--- Determine if done. if YES, 
+      .then( results => {
+        if (results == true) {
 
-        //-- 01/16/2022 #EP ||ADD While Loop for getting team membesr until done
-        // while still adding team members
-        // run _get_teamData()
-        // ask if done
-        // exit once done
-
-        return teamData_Dict;
-      })  
+        }
+        else {
+          return this.teamData_Dict;
+        }
+      })
       
       //-- Build the HTML content
       .then( teamData_Dict => {
