@@ -184,10 +184,54 @@ class Init {
   };
 
 
-  //----------------------------------------------------------------------------//
+//----------------------------------------------------------------------------//
 //-- Getting User Data
 
-  get_TeamData = () => { /* 
+_verify_EmployeeEntry = employee_Obj => { 
+  //-- Prompt user to give them choice to add or redo employee
+ 
+
+console.log(`
+==================================
+  Confirming Employee Entry
+==================================
+${employee_Obj}`);
+  return inquirer
+  .prompt([
+    {
+      type: 'list',
+      confirmation: 'License',
+      message: 'Would you like to add this employee to your team: ',
+      choices: ['None','ISC', 'MIT', 'GNU']
+    }
+  ]);
+};
+
+
+
+_get_GitHub(){
+  return inquirer
+    .prompt([ 
+        //-- GitHub Username
+      {
+        type: 'input',
+        name: 'github',
+        message: 'Your GitHub Username: ',
+        validate: githubInput => {
+            if (githubInput) {
+            return true;
+            } else {
+            console.log('Please enter your GitHub username!');
+            return false;
+            }
+        }
+      }
+    ]);
+};
+
+
+
+_get_EmployeeBasics = () => { /* 
         Uses inquirer.js to prompt user specific details.
 
         collecting the following values
@@ -197,9 +241,9 @@ class Init {
     */
 
     console.log(`
-  ======================
-    Get Team Data
-  ======================
+==================================
+  Add an Employee to Your Team
+==================================
     `);
     
     return inquirer
@@ -209,38 +253,21 @@ class Init {
         {
           type: 'input',
           name: 'name',
-          message: 'Your name: ',
+          message: 'Define employees name: ',
           validate: nameInput => {
             if (nameInput) {
               return true;
             } else {
-              console.log('Please enter your name!');
+              console.log('Please enter a name.');
               return false;
             }
           }
         },
-
-        //-- GitHub Username
-        {
-            type: 'input',
-            name: 'github',
-            message: 'Your GitHub Username: ',
-            validate: githubInput => {
-                if (githubInput) {
-                return true;
-                } else {
-                console.log('Please enter your GitHub username!');
-                return false;
-                }
-            }
-        },
-
         //-- Email Address
-        //-- TODO:: Pull and add to proper section ( Issue #8)
         {
             type: 'input',
             name: 'email',
-            message: 'Your email address ( for others to contact you ): ',
+            message: 'Define employees email address: ',
             validate: function(email) {
               // Regex mail check (return true if valid mail)
               let valid_Email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
@@ -248,12 +275,18 @@ class Init {
                 return true;
               }
               else {
-                console.log('Please enter a valid email address!');
+                console.log('Please enter a valid email address.');
                 return false;
               }
           }
-        }
-          
+        },
+         //-- Role
+         {
+          type: 'list',
+          name: 'role',
+          message: 'Define employees role:',
+          choices: ['Manager', 'Engineer', 'Intern']
+        },          
     ]);
   };
 
@@ -276,7 +309,7 @@ class Init {
       };
     
     //-- Get user specific info
-    this.get_TeamData()
+    this._get_EmployeeBasics()
       //-- then write userdata to array
       .then( teamData_Results => {
       
