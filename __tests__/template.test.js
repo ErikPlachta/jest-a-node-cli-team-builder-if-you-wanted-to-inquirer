@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //-- Imports
 
-const Template = require('../src/template.js');
+const {set_TeamTemplate,_get_GitHub,} = require('../src/template.js');
 
 const Team = require('../lib/__mocks__/team.js');
 
@@ -10,11 +10,18 @@ const Team = require('../lib/__mocks__/team.js');
 
 //-- Build data into template to prepare to write
 test('RUN template primary build function to verify returns a response', () => {
+    
+    expect(set_TeamTemplate(Team.getTeam())).toBeDefined();
+});
+
+
+
+test('GET Intern GitHub URLs', () => {
 
     //-- Create new template OBJ
-    const template = Object.assign(Template);
-    
-    expect(template(Team.getTeam())).toBeDefined();
+
+    expect(_get_GitHub(Team.getTeam())).toBeDefined();
+
 });
 
 // //-- Write build data to file

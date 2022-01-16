@@ -11,10 +11,10 @@
 //-- runs prompts
 const inquirer = require('inquirer');
 
-//-- builds file TODO:: 01/15/2022 #EP || Update this
-const set_TeamTemplate = require('./src/template.js');
+//-- builds template based on user defined team
+const {set_TeamTemplate} = require('./src/template.js');
 
-//-- grabbing functions from generate-site with object destructing
+//-- Writes myteam.html file
 const set_writeTeamFile = require('./utils/write-team.js');
 
 //----------------------------------------------------------------------------//

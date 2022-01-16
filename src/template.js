@@ -4,6 +4,13 @@
 
 
 //----------------------------------------------------------------------------//
+//-- Get GitHub URLS updated for interns
+
+function _get_GitHub(teamDict){
+  return true;
+}
+
+//----------------------------------------------------------------------------//
 //-- Build Table of Contents
 
 //TODO:: 01/15/2022 #EP | get waht I need then delete this
@@ -54,31 +61,6 @@ function _set_TOC(project_Data, toc, TOC) {
   //----------------------------------------------------------------------------//
   //-- Building section data
   
-  //TODO:: 01/15/2022 #EP | get waht I need then delete this
-  const _get_Guidelines = project_Data => {
-    // -- If provided guidelines, build them.
-  
-    // console.log(project_Data.guidelines);
-    if (project_Data.Guidelines) {
-      return `## Guidelines
-  
-  ${project_Data.Guidelines}`
-    }
-  }
-  
-  //TODO:: 01/15/2022 #EP | get waht I need then delete this
-  const _get_Useage = project_Data => {
-    // -- If provided guidelines, build them.
-  
-    //-- if defined
-    if (project_Data.Useage_summary) {
-      //-- return markdown content
-      return `${project_Data.Useage_summary}
-  
-  ${project_Data.Useage_syntax}`
-    } 
-  }
-  
   
   // TODO:: 01/07/2022 #EP || Build these out
   const _get_License = readme_Data => {
@@ -116,7 +98,7 @@ function _set_TOC(project_Data, toc, TOC) {
 //----------------------------------------------------------------------------//
 //-- RUNNING 
   
-module.exports = myTeam => {
+const set_TeamTemplate = teamData_Dict => {
 return`<!DOCTYPE html>
 <html>
 <head>
@@ -252,3 +234,6 @@ return`<!DOCTYPE html>
 </body>
 </html>
 `;};
+
+
+module.exports = {set_TeamTemplate,_get_GitHub}
