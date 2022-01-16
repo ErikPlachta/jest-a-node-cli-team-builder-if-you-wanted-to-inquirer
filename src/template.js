@@ -1,3 +1,4 @@
+
 //----------------------------------------------------------------------------//
 //-- building the page
 
@@ -121,66 +122,134 @@ function _set_TOC(project_Data, toc, TOC) {
 //-- RUNNING 
   
 module.exports = myTeam => {
-  // destructure page data by section
-      
-  
-  // console.log("project_Data: ", project_Data)
-  // console.log("TOC: ", TOC)
-  //-- Build and then return dynamically
-  return `<html>
+return`<!DOCTYPE html>
+<html>
 <head>
-
-  <!-- importing bootstrap -->  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <title>My Team</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <!-- Bootstrap for Cards -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous">
+  <!-- FontAwesome for Icons -->
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <!-- <script src="https://use.fontawesome.com/bab062a6a0.js"></script> -->
+  
 </head>
 <body>
-  <header>
-    <h1>My Teamr</h1>
+  <header class="p-5 mb-5 d-flex justify-content-evenly text-white" style="background-color: #E84756">
+    <h1 class="row">My Team</h1>
   </header>
   
-  <section class="teamMembers">
+  <!-- Parent Container -->
+  <section class="container">
+
     
-    <div class="teamMember manager">
-      <span>  
-        <h2>Manger Name</h2>
-        <span class="role">Manager</span>
-      </span>
-      <span class="teamMember_details">
-        <span class="id">ID: </span>
-        <span class="email">Email: </span>
-        <span class="github">GitHub: </span>
-      </span>
-    </div>
+    <!-- Puts all cards in row and flexes so size and space is consistent -->
+    <div class="d-flex justify-content-center row">
 
 
-    <div class="teamMember engineer">
-      <span>  
-        <h2>Engineer Name</h2>
-        <span class="role">Engineer</span>
-      </span>
-      <span class="teamMember_details">
-        <span class="id">ID: </span>
-        <span class="email">Email: </span>
-        <span class="github">GitHub: </span>
-      </span>
-    </div>
-
-    <div class="teamMember intern">
-      <span>  
-        <h2>Intern Name</h2>
-        <span class="role">Intern</span>
-      </span>
-      <span class="teamMember_details">
-        <span class="id">ID: </span>
-        <span class="email">Email: </span>
-        <span class="github">GitHub: </span>
-      </span>
-    </div>
+      <!-- Card -->
+      <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title">Manager Name</h3>
+          <h5 class="card-title"> 
+            <i class='fas fa-mug-hot'></i>
+            Manager
+          </h5>
+        </div>
+        <div class ="p-3 bg-light col">
+          <ul class="list-group list-group-flush p-2 pb-3 pt-3">
+            <li class="list-group-item bg-white p-3">ID: </li>
+            <li class="list-group-item bg-white p-3">Email: </li>
+            <li class="list-group-item bg-white p-3">GitHub: </li>
+          </ul>
+        </div>
+      </div>
   
+       <!-- Card -->
+       <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title">Manager Name</h3>
+          <h5 class="card-title"> 
+            <i class='fas fa-mug-hot'></i>
+            Manager
+          </h5>
+        </div>
+        <div class ="p-3 bg-light col">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-white p-3">ID: </li>
+            <li class="list-group-item bg-white p-3">Email: </li>
+            <li class="list-group-item bg-white p-3">GitHub: </li>
+          </ul>
+        </div>
+      </div>
+  
+       <!-- Card -->
+       <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title">Manager Name</h3>
+          <h5 class="card-title"> 
+            <i class='fas fa-mug-hot'></i>
+            Manager
+          </h5>
+        </div>
+        <div class ="p-3 bg-light col">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-white p-3">ID: </li>
+            <li class="list-group-item bg-white p-3">Email: </li>
+            <li class="list-group-item bg-white p-3">GitHub: </li>
+          </ul>
+        </div>
+      </div>
+  
+
+      <!-- Card -->
+      <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title">Engineer Name</h3>
+          <h5 class="card-title"> 
+            <i class='fas fa-glasses'></i>
+            Engineer
+          </h5>
+        </div>
+        <div class ="p-3 bg-light">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-white p-3">ID: </li>
+            <li class="list-group-item bg-white p-3">Email: </li>
+            <li class="list-group-item bg-white p-3">GitHub: </li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Card -->
+      <div class="card shadow border-light m-3 col-lg-4 d-flex align-items-stretch p-0" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title">Intern Name</h3>
+          <h5 class="card-title"> 
+            <i class='fas fa-user-graduate'></i>
+            Intern
+          </h5>
+        </div>
+        <div class ="p-3 bg-light">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-white p-3">ID: </li>
+            <li class="list-group-item bg-white p-3">Email: </li>
+            <li class="list-group-item bg-white p-3">GitHub: </li>
+          </ul>
+        </div>
+      </div>
+
+    <!-- End of ROW holding cards COL -->
+    </div>
+    <!-- End of parent container -->
   </section>
 
-<footer>
+<footer class="p-2 mt-5 d-flex justify-content-evenly text-white bottom-0 end-0" style="background-color: #E84756">
   <span>
     Generated on: ${new Date().getFullYear()}
     </span>
