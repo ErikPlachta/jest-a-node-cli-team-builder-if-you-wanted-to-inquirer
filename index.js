@@ -79,10 +79,14 @@ class Init {
     ==================================
       Confirming Employee Entry
     ==================================
-    - Name: ${employee_Obj.name}
-    - Email: ${employee_Obj.email}
-    - Role: ${employee_Obj.role}
     `);
+
+    //-- Print user payload into CLI for User integrity check
+    Object.keys(employee_Obj).forEach((key) => {
+      console.log(`${key}: ${employee_Obj[key]}`);
+    });
+    //-- Adding a space below
+    console.log("\n")
 
     return inquirer
     .prompt([
@@ -248,17 +252,18 @@ class Init {
       
       //-- Define role specific values
       .then(employee_Obj => {  
+        //-- Update the temp employee obj with results here
         temp_Employee = employee_Obj;
         return this._get_Roles(employee_Obj);
       })
 
       .then(roleResults => {
-        console.log(roleResults)
+        // console.log(roleResults)
         
-        
+        //-- Merge role answers into temp_Employee object so complete
         temp_Employee = Object.assign({},temp_Employee,roleResults)
         
-        console.log(temp_Employee)
+        //-- 
         return this._verify_EmployeeEntry(temp_Employee);
       })
       
