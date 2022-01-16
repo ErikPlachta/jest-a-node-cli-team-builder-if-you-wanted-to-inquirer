@@ -187,25 +187,29 @@ class Init {
 //----------------------------------------------------------------------------//
 //-- Getting User Data
 
-_verify_EmployeeEntry = employee_Obj => { 
-  //-- Prompt user to give them choice to add or redo employee
+  _verify_EmployeeEntry = employee_Obj =>  { 
+    //-- Prompt user to give them choice to add or redo employee
  
+    //-- Print user prompt
+      console.log(`
+  ==================================
+    Confirming Employee Entry
+  ==================================
+  - Name: ${employee_Obj.name}
+  - Email: ${employee_Obj.email}
+  - Role: ${employee_Obj.role}
+  `);
 
-console.log(`
-==================================
-  Confirming Employee Entry
-==================================
-${employee_Obj}`);
-  return inquirer
-  .prompt([
-    {
-      type: 'list',
-      confirmation: 'License',
-      message: 'Would you like to add this employee to your team: ',
-      choices: ['None','ISC', 'MIT', 'GNU']
-    }
-  ]);
-};
+    return inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'add',
+        message: 'Would you like to add the above employee to your team?: ',
+        choices: ['Yes','No']
+      }
+    ]);
+  };
 
 
 
@@ -311,6 +315,14 @@ _get_EmployeeBasics = () => { /*
     //-- Get user specific info
     this._get_EmployeeBasics()
       //-- then write userdata to array
+      .then(employee_Obj => {
+        return this._verify_EmployeeEntry(employee_Obj) 
+      })
+      .then(add => {
+        console.log(add);
+      })
+      
+      //-- Merge Data
       .then( teamData_Results => {
       
         // teamData_Dict.user_Data = Object.assign({},readme_Data.user_Data, user_Data);
@@ -325,12 +337,12 @@ _get_EmployeeBasics = () => { /*
         return teamData_Dict;
       })  
       
-      //-- Send data into template to build OBJ that will be used to write
+      //-- Build the HTML content
       .then( teamData_Dict => {
         return set_TeamTemplate(teamData_Dict);
       })
 
-      //-- Write readme file to ./dist/README.md
+      //-- Write File to ./dist/myteam.html
       .then( template_MyTeam => {
         return set_writeTeamFile(template_MyTeam);
       })
