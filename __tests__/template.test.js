@@ -14,16 +14,6 @@ test('RUN template primary build function to verify returns a response', () => {
     expect(set_TeamTemplate(Team.getTeam())).toBeDefined();
 });
 
-
-
-test('GET Engineer GitHub URLs', () => {
-
-    //-- Create new template OBJ
-
-    expect(_get_GitHub(Team.getTeam())).toBeDefined();
-
-});
-
 test("GET each employee card HTML based on their employee type from function _get_EmployeeCard.", () => {
 
     expect(_get_EmployeeCards(Team.getTeam())).toBeDefined();

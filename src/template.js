@@ -1,9 +1,3 @@
-
-//----------------------------------------------------------------------------//
-//-- building the page
-
-
-
 //----------------------------------------------------------------------------//
 //-- Building Employee Cards
 
@@ -83,7 +77,7 @@ const _get_EmployeeCards = teamData_Dict => {
       teamData_Cards.push(card_Template);
   };
   
-  console.log(teamData_Cards.join(''));
+  // console.log(teamData_Cards.join(''));
 
   return teamData_Cards.join('');
 };
@@ -110,7 +104,7 @@ const set_TeamTemplate = teamData_Dict => {
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
   <!-- FontAwesome for Icons -->
-  <script src='https://kit.fontawesome.com/a076d05399.js'crossorigin="anonymous"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   
 </head>
 <body>
