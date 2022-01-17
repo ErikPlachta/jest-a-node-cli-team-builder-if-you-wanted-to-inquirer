@@ -15,7 +15,7 @@
     - [Starting the App](#starting-the-app)
     - [Viewing Results](#viewing-results)
     - [Repo Stats](#repo-stats)
-    - [Video of Full Process](#video-of-full-process)
+[Video of Full Process](#test-with-jest-passing)
 - [Contributors](#contributors)
 - [Questions?](#questions)
 
@@ -87,6 +87,13 @@ THEN I exit the application, and the HTML is generated
 - For your convience, here is a video/gif of the full process
 <!-- ![full process of using and results](./assets/full.gif) -->
 <img src="./assets/readme-content/full.gif" width="600">
+
+
+### Test with Jest Passing
+
+- Here is a video demonstrating all tests ran with jest as passing
+<!-- ![full process of using and results](./assets/full.gif) -->
+<img src="./assets/readme-content/npm-test.gif" width="600">
 
 ## Repo Stats
 
