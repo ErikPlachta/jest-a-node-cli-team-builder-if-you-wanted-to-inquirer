@@ -74,7 +74,7 @@ THEN I exit the application, and the HTML is generated
 ### Using the App
 
 <!-- ![Using App](./assets/images/useapp.gif) -->
-<img src="./assets/readme-content/useapp.gif" width="600">
+<img src="./assets/readme-content/node-index.gif" width="600">
 
 ### Viewing Results
 
