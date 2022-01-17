@@ -12,13 +12,13 @@ const _get_EmployeeRole = role => {
   //-- Takes the role of employee as argument, returns results
 
   if (role === 'Manager') {
-    return`<i class='fas fa-mug-hot'></i>Manager`
+    return`<i class='fas fa-mug-hot'></i> Manager`
   }
   else if ( role === 'Engineer') {
-    return`<i class='fas fa-glasses'></i>Engineer`
+    return`<i class='fas fa-glasses'></i> Engineer`
   }
   else if ( role === 'Intern'){
-    return`<i class='fas fa-user-graduate'></i>Intern`
+    return`<i class='fas fa-user-graduate'></i> Intern`
   } 
   else {
     return`Employee`
