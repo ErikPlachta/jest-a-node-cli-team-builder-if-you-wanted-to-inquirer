@@ -14,8 +14,9 @@
     - [Using The App](#using-the-app)
     - [Starting the App](#starting-the-app)
     - [Viewing Results](#viewing-results)
-    - [Repo Stats](#repo-stats)
-[Video of Full Process](#test-with-jest-passing)
+    - [Requirements](#requirements)
+    - [Video of Full Process](#test-with-jest-passing)
+- [Repo Stats](#repo-stats)
 - [Contributors](#contributors)
 - [Questions?](#questions)
 
@@ -74,19 +75,12 @@ THEN I exit the application, and the HTML is generated
 ### Using the App
 
 <!-- ![Using App](./assets/images/useapp.gif) -->
-<img src="./assets/readme-content/node-index.gif" width="600">
+<img src="./assets/readme-content/full.gif" width="600">
 
 ### Viewing Results
 
 <!-- ![Results Example](./assets/images/results.gif) -->
 <img src="./assets/readme-content/results.gif" width="600">
-
-
-### Video of Full Process
-
-- For your convience, here is a video/gif of the full process
-<!-- ![full process of using and results](./assets/full.gif) -->
-<img src="./assets/readme-content/full.gif" width="600">
 
 
 ### Test with Jest Passing
