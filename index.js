@@ -33,10 +33,6 @@ class Init {
     // this.teamComplete = false;
   };
 
-  
-
-
-
   //----------------------------------------------------------------------------
   //-- Validating User Data
 
@@ -107,22 +103,14 @@ class Init {
     ]);
   };
 
-
-
   //--------------------------------------------------------------------------
   //-- Getting User Data
 
   //-- Function that asks employee details
-  _get_EmployeeBasics = () => { /* 
-          Uses inquirer.js to prompt user specific details.
+  _get_EmployeeBasics = () => { 
+    //-- Uses inquirer.js to prompt user specific details.
 
-          collecting the following values
-            name
-            github
-            email
-      */
-
-      console.log(`
+    console.log(`
   ==================================
     Add an Employee to Your Team
   ==================================
@@ -326,22 +314,6 @@ class Init {
       .catch(err => {
         console.log("ERROR: ", err);
       });
-    
-    
-      // //-- Write File to ./dist/myteam.html
-      // .then( template_MyTeam => {
-      //   return set_writeTeamFile(template_MyTeam);
-      // })
-  
-      // //-- If success, we take the writeFileResponse object provided by the writeFile()
-      // // function's resolve() execution to log it.
-      // .then(write_Response => {
-      //   console.log(write_Response);
-      // })
-      // //-- if it fails any-step along the way, catch error nd log here.
-      // .catch(err => {
-      //   console.log("ERROR: ", err);
-      // });
   };
   
 
@@ -350,29 +322,6 @@ class Init {
     //-- Starts the APP by kicking off team builder
     
     this._set_Team()
-    
-    
-      
-    //   //-- Build the HTML content
-    //   .then( teamData_Dict => {
-    //     return set_TeamTemplate(this.teamData_Dict);
-    //   })
-
-    //   //-- Write File to ./dist/myteam.html
-    //   .then( template_MyTeam => {
-    //     return set_writeTeamFile(template_MyTeam);
-    //   })
-  
-    //   //-- If success, we take the writeFileResponse object provided by the writeFile()
-    //   // function's resolve() execution to log it.
-    //   .then(write_Response => {
-    //     console.log(write_Response);
-    //   })
-    //   //-- if it fails any-step along the way, catch error nd log here.
-    //   .catch(err => {
-    //     console.log("ERROR: ", err);
-    //   })
-    // ;
   
   };
 
