@@ -22,7 +22,7 @@ const set_writeTeamFile = require('./utils/write-team.js');
 
 class Init {
   constructor(){
-    // TODO:: 01/16/2022 #EP || Add things or remove this is not needed.
+    
     this.set_TeamTemplate = set_TeamTemplate;
     this.set_writeTeamFile = set_writeTeamFile;
     
