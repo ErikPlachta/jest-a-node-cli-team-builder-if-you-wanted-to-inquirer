@@ -6,8 +6,8 @@
 
 ## Index
 
-- [Concept Summary](#concept-summary)
-- [Concept Goals](#concept-goals)
+- [Summary](#summary)
+- [functionality](#functionality)
 - [Useage](#useage)
     - [Requirements](#requirements)
     - [Installation](#installation)
@@ -21,7 +21,7 @@
 - [Questions?](#questions)
 
 
-## Concept Summary
+## Summary
 
 Build a Node.js command-line application that takes in information about employees
 on a software engineering team and generates an HTML webpage that displays
@@ -29,25 +29,15 @@ summaries for each person. Because testing is key to making code maintainable,
 you’ll also write unit tests for each part of your code and ensure that it passes
 all of them.
 
-## Concept Goals
+## Features
 
-- :white_check_mark: **GIVEN a command-line application that accepts user input**
-- :white_check_mark: WHEN I am prompted for my team members and their information
-THEN an HTML file is generated that displays a nicely formatted team roster based on user input
-- :white_check_mark: WHEN I click on an email address in the HTML
-THEN my default email program opens and populates the TO field of the email with the address
-- :white_check_mark: WHEN I click on the GitHub username
-THEN that GitHub profile opens in a new tab
-- :white_check_mark: WHEN I start the application
-THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
-- :white_check_mark: WHEN I enter the team manager’s name, employee ID, email address, and office number
-THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-- :white_check_mark: WHEN I select the engineer option
-THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-- :white_check_mark: WHEN I select the intern option
-THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-- :white_check_mark: WHEN I decide to finish building my team
-THEN I exit the application, and the HTML is generated
+1 WHEN testing the App, THEN user can type `npm jest` to verify
+2. WHEN using the App, THEN user is presented with a **CLI** prompting for employee details including Name, Email, and employee Role within the team of either Manager, Engineer, and Intern. 
+3. WHEN user selects the employees role, THEN they're prompted with a unique detail to fill in for that employee.
+4. WHEN user finalizes enter employee details, THEN user is prompted to verify employee information. If incorrect, user can select no and re-enter the detiails otherwise select yes. 
+5. WHEN user is finished building their team, THEN user selects YES on prompt after creating employee to generate an HTML file of the team deteails. At this time the CLI will close.
+6. WHEN user views the HTML file, they can view the team details. 
+7. WHEN user selects an email address from the HTML file, their default Email application will open to allow user to send an email to specific employee.
 
 ---
 
